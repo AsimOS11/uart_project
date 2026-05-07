@@ -1,56 +1,52 @@
+--- 
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  title:        "8-N-1 UART Transceiver with Parity"      
+  author:       "Your Friend's Name"                      
+  slack:        ""                                        
+  discord:      ""                                        
+  description:  "A complete 8-N-1 UART Transceiver with configurable Even/Odd Parity checking, targeting 9600 baud at a 50MHz system clock."
+  language:     "Verilog" 
+  clock_hz:     50000000       
 
-  # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  # How many tiles your design occupies? A single tile is about 160x100 um.
+  tiles: "1x1"          
 
-  # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  # Top level module name. MUST match the Verilog module name perfectly.
+  top_module:  "tt_um_uart_transceiver"
 
   # List your project's source files here.
-  # Source files must be in ./src and you must list each source file separately, one per line.
-  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project.v"
 
-# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+# The pinout of your project. This generates the documentation automatically.
 pinout:
-  # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  # Inputs (ui_in)
+  ui[0]: "tx_data_in[0] (LSB)"
+  ui[1]: "tx_data_in[1]"
+  ui[2]: "tx_data_in[2]"
+  ui[3]: "tx_data_in[3]"
+  ui[4]: "tx_data_in[4]"
+  ui[5]: "tx_data_in[5]"
+  ui[6]: "tx_data_in[6]"
+  ui[7]: "tx_data_in[7] (MSB)"
 
-  # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  # Outputs (uo_out)
+  uo[0]: "rx_data_out[0] (LSB)"
+  uo[1]: "rx_data_out[1]"
+  uo[2]: "rx_data_out[2]"
+  uo[3]: "rx_data_out[3]"
+  uo[4]: "rx_data_out[4]"
+  uo[5]: "rx_data_out[5]"
+  uo[6]: "rx_data_out[6]"
+  uo[7]: "rx_data_out[7] (MSB)"
 
-  # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
-
-# Do not change!
-yaml_version: 6
+  # Bidirectional pins (uio_in / uio_out)
+  uio[0]: "rx_in (Serial Input)"
+  uio[1]: "tx_start (Pulse High to Transmit)"
+  uio[2]: "parity_sel (0=Even, 1=Odd)"
+  uio[3]: "tx_out (Serial Output)"
+  uio[4]: "rx_valid (Pulses High on Success)"
+  uio[5]: "parity_error (High if Error Detected)"
+  uio[6]: "unused"
+  uio[7]: "unused"
